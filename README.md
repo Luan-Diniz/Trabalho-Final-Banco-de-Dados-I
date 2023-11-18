@@ -12,9 +12,6 @@ Como rodar:
 
     Um volume é criado, ou seja, as alterações realizadas no BD continuam salvas localmente.
 
-    Alguns comandos úteis:
-        docker ps -a    (Lista os containers docker)
-
     Para parar a execução de um container:
         docker stop id_container
     Para iniciar a execução de um container:
@@ -23,21 +20,20 @@ Como rodar:
 
 Para executar a aplicação python:
     1- Esteja com o container docker rodando.
-    2- Tenha os requirements.txt instalados.
-        (POR COMANDO PARA INSTALAR OS requirements.txt)
+    2- Tenha os requirements.txt instalados:          (É aconselhável o uso de um Virtual Environment, embora não necessário)
+        pip install -r requirements.txt               (Qualquer erro consulte a documentação oficial das bibliotecas)
     
     3- Executar a aplicação python
-        (POR COMANDO PARA EXECUTAR O .py)
-
-
-
-
-
-
-Para remover imagens docker:
-    docker image rm 'nameOfTheImage'
+        python3 app.py
 
 
 
 Para deletar containers, imagens e volumes docker:
-    POR COMANDOS AQUI
+    docker ps -a                       (Lista todos os containers)
+    docker rm "ID_container"           (Remove o container em específico)
+
+    docker volume ls                   (Lista os volumes docker existentes)
+    docker volume rm "nome_volume"     (Remove o volume em específico)
+
+    docker image ls                    (Lista todas as imagens docker existentes)
+    docker image rm "nomeImagem_ou_ID" (Remove a imagem em específico)

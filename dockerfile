@@ -8,4 +8,5 @@ COPY ./sql/create_tables.sql /docker-entrypoint-initdb.d/create_tables.sql
 # copy the sql script to fill tables
 COPY ./sql/fill_tables.sql /docker-entrypoint-initdb.d/fill_tables.sql
 
+
 VOLUME /var/lib/postgresql/data
