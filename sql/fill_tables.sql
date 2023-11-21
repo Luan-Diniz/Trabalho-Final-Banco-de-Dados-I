@@ -1,71 +1,81 @@
--- Set params
-set session my.number_of_sales = '100';
-set session my.number_of_users = '100';
-set session my.number_of_products = '100';
-set session my.number_of_stores = '100';
-set session my.number_of_coutries = '100';
-set session my.number_of_cities = '30';
-set session my.status_names = '5';
-set session my.start_date = '2019-01-01 00:00:00';
-set session my.end_date = '2020-02-01 00:00:00';
+-- Inserting data into the Patrocinadores table
+INSERT INTO Patrocinadores (Marca, Valor_do_Patrocinio, id_patrocinador)
+VALUES ('Oracle', 500000000, 1),
+       ('Petronas', 75000000, 2),
+       ('Santander', 50000000, 3),
+       ('Google', 130000000, 4);
+       
+       
+-- Inserting data into the Equipe table
+INSERT INTO Equipe (Nome, Sede, id_equipe, Diretor, idPatrocionadores)
+VALUES ('Redbull Racing', 'UK', 1, 'Oliver Mintzlaff', 1),
+       ('Mercedes', 'Germany', 2, 'Ola Kallenius', 2),
+       ('Ferrari', 'Italy', 3, 'Benedetto Vigna', 3),
+       ('McLaren', 'UK', 4, 'Zak Brown', 4);
+       
 
--- load the pgcrypto extension to gen_random_uuid ()
-CREATE EXTENSION pgcrypto;
+-- Inserting data into the Piloto table
+INSERT INTO Piloto (Numero_de_pole_positions, Id_Piloto, Número_de_Vitórias, Nome, Nacionalidade, Pontos_de_Corrida, Número_de_Pódios, idEquipe)
+VALUES (31, 1, 53, 'Max Verstappen', 'Belgian', 549 ,97, 1),
+       (3, 2, 6, 'Sergio Perez', 'Mexican', 273, 35, 1),		
+       (104 , 3, 103, 'Lewis Hamilton', 'British', 232, 197, 2),
+       (1, 4, 1, 'George Russel', 'British', 160, 10, 2),
+       (23, 5, 5, 'Charles Leclerc', 'Monegasque', 188, 29, 3),
+       (5, 6, 2, 'Carlos Sainz Jr.', 'Spanish', 200, 18, 3),
+       (1, 7, 0,'Lando Norris', 'British', 195, 13, 4),
+       (0, 8, 0, 'Oscar Piastri', 'Australian', 89, 2, 4);
 
--- Filling of products
-INSERT INTO product
-select id, concat('Product ', id) 
-FROM GENERATE_SERIES(1, current_setting('my.number_of_products')::int) as id;
 
--- Filling of countries
-INSERT INTO country
-select id, concat('Country ', id) 
-FROM GENERATE_SERIES(1, current_setting('my.number_of_coutries')::int) as id;
+-- Inserting data into the Campeonato table
+INSERT INTO Campeonato (id_campeonato, Ano, Vencedor, Numero_de_Corridas)
+VALUES (1, 2023, 1, 5);
 
--- Filling of cities
-INSERT INTO city
-select id
-	, concat('City ', id)
-	, floor(random() * (current_setting('my.number_of_coutries')::int) + 1)::int
-FROM GENERATE_SERIES(1, current_setting('my.number_of_cities')::int) as id;
 
--- Filling of stores
-INSERT INTO store
-select id
-	, concat('Store ', id)
-	, floor(random() * (current_setting('my.number_of_cities')::int) + 1)::int
-FROM GENERATE_SERIES(1, current_setting('my.number_of_stores')::int) as id;
+-- Inserting data into the Circuito table
+INSERT INTO Circuito (Melhor_Tempo, Extensão, Nome, Local)
+VALUES ('01:18.887', 5.8, 'Monza', 'Italy'),
+       ('01:27.369', 5.9, 'Silverstone', 'UK'),
+       ('01:47.176', 7, 'Spa-Francorchamps', 'Belgium'),
+       ('01:10.540', 4.3, 'Interlagos', 'Brazil'),
+       ('01:14.439', 3.3, 'Circuit de Monaco', 'Monaco');
+       
 
--- Filling of users
-INSERT INTO users
-select id
-	, concat('User ', id)
-FROM GENERATE_SERIES(1, current_setting('my.number_of_users')::int) as id;
+-- Inserting data into the Transmissão table
+INSERT INTO Transmissão (Emissora, Ano, Comentaristas, Audiência)
+VALUES (1, 2023, 5, 1800000);
 
--- Filling of users
-INSERT INTO status_name
-select status_name_id
-	, concat('Status Name ', status_name_id)
-FROM GENERATE_SERIES(1, current_setting('my.status_names')::int) as status_name_id;
 
--- Filling of sales  
-INSERT INTO sale
-select gen_random_uuid ()
-	, round(CAST(float8 (random() * 10000) as numeric), 3)
-	, TO_TIMESTAMP(start_date, 'YYYY-MM-DD HH24:MI:SS') +
-		random()* (TO_TIMESTAMP(end_date, 'YYYY-MM-DD HH24:MI:SS') 
-							- TO_TIMESTAMP(start_date, 'YYYY-MM-DD HH24:MI:SS'))
-	, floor(random() * (current_setting('my.number_of_products')::int) + 1)::int
-	, floor(random() * (current_setting('my.number_of_users')::int) + 1)::int
-	, floor(random() * (current_setting('my.number_of_stores')::int) + 1)::int
-FROM GENERATE_SERIES(1, current_setting('my.number_of_sales')::int) as id
-	, current_setting('my.start_date') as start_date
-	, current_setting('my.end_date') as end_date;
+-- Inserting data into the Carro table
+INSERT INTO Carro (Trocas_MGU_K, Trocas_MGU_H, Numero_do_carro, idPiloto)
+VALUES (3, 3, 1, 1),
+       (3, 2, 11, 2),
+       (2, 1, 44, 3),
+       (2, 2, 63, 4),
+       (1, 1, 16, 5),
+       (0, 4, 55, 6),
+       (3, 2 , 4, 7),
+       (3, 1 , 81, 8);
+       
+    
+-- Inserting data into the Transmite table
+INSERT INTO Transmite (id_campeonato, Emissora)
+VALUES (1, 1);
 
--- Filling of order_status  
-INSERT INTO order_status
-select gen_random_uuid ()
-	, date_sale + random()* (date_sale + '5 days' - date_sale)
-	, sale_id
-	, floor(random() * (current_setting('my.status_names')::int) + 1)::int
-from sale;
+
+-- Inserting data into the Possui table
+INSERT INTO Possui (id_campeonato, Nome)
+VALUES (1, 'Monza'),
+       (1, 'Silverstone'),
+       (1, 'Spa-Francorchamps'),
+       (1, 'Interlagos'),
+       (1, 'Circuit de Monaco'); 
+       
+
+-- Inserting data into the Participa table
+INSERT INTO Participa (id_equipe, id_campeonato)
+VALUES (1, 1),
+       (2, 1),
+       (3, 1);
+       
+       
+
