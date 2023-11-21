@@ -1,145 +1,82 @@
-/*
---Criação tabela campeonato
-CREATE TABLE IF NOT EXISTS campeonato (
-  id INT NOT NULL,
-  ano INT NOT NULL,
-  numero_corridas INT NOT NULL,
-  vencedor varchar(250),
-  PRIMARY KEY id
+CREATE TABLE Transmissão (
+  Emissora INT,
+  Ano INT,
+  Comentaristas INT,
+  Audiência INT,
+  PRIMARY KEY (Emissora, Ano)
 );
-
-
---Criação tabela equipe
-CREATE TABLE IF NOT EXISTS equipe (
-  id_equipe INT NOT NULL,
-  nome varchar(400),
-  diretor varchar(250),
-  sede varchar(250),
-  patricionadores varchar(500),
-  PRIMARY KEY id_equipe
+CREATE TABLE Campeonato (
+  id_campeonato INT PRIMARY KEY,
+  Ano INT,
+  Vencedor INT,
+  Numero_de_Corridas INT
 );
-
-
---Criação tabela piloto
-CREATE TABLE IF NOT EXISTS piloto (
-
-
+CREATE TABLE Circuito (
+  Melhor_Tempo TIME,
+  Extensão FLOAT,
+  Nome VARCHAR(255),
+  Local VARCHAR(255),
+  PRIMARY KEY (Nome, Local)
 );
-
-
---Criação tabela carro
-CREATE TABLE IF NOT EXISTS carro (
-
-
+CREATE TABLE Equipe (
+  Nome VARCHAR(255),
+  Sede VARCHAR(255),
+  id_equipe INT PRIMARY KEY,
+  Diretor VARCHAR(255),
+  idPatrocionadores INT
 );
-
-
---Criação tabela circuito
-CREATE TABLE IF NOT EXISTS circuito (
-
-
+CREATE TABLE Piloto (
+  Numero_de_pole_positions INT,
+  Id_Piloto INT PRIMARY KEY,
+  Número_de_Vitórias INT,
+  Nome VARCHAR(255),
+  Nacionalidade VARCHAR(255),
+  Pontos_de_Corrida INT,
+  Número_de_Pódios INT,
+  idEquipe INT
 );
-
-
---Criação tabela corrida
-CREATE TABLE IF NOT EXISTS corrida (
-
-
+CREATE TABLE Carro (
+  Trocas_MGU_K INT,
+  Trocas_MGU_H INT,
+  Numero_do_carro INT PRIMARY KEY,
+  idPiloto INT
 );
-
-
---Criação tabela transmissao
-CREATE TABLE IF NOT EXISTS transmissao (
-
-
+CREATE TABLE Patrocionadores (
+  Marca VARCHAR(255),
+  Valor_do_Patrocinio FLOAT,
+  id_patrocinador INT PRIMARY KEY
 );
-
-
---Criacao de outras tabelas (provavelmente de relação)
-*/
-
-
--- Creation of product table
-CREATE TABLE IF NOT EXISTS product (
-  product_id INT NOT NULL,
-  name varchar(250) NOT NULL,
-  PRIMARY KEY (product_id)
+CREATE TABLE Transmite (
+  id_campeonato INT,
+  Emissora INT,
+  PRIMARY KEY (id_campeonato, Emissora)
 );
-
--- Creation of country table
-CREATE TABLE IF NOT EXISTS country (
-  country_id INT NOT NULL,
-  country_name varchar(450) NOT NULL,
-  PRIMARY KEY (country_id)
+CREATE TABLE Possui (
+  id_campeonato INT,
+  Nome VARCHAR(255),
+  PRIMARY KEY (id_campeonato, Nome)
 );
-
--- Creation of city table
-CREATE TABLE IF NOT EXISTS city (
-  city_id INT NOT NULL,
-  city_name varchar(450) NOT NULL,
-  country_id INT NOT NULL,
-  PRIMARY KEY (city_id),
-  CONSTRAINT fk_country
-      FOREIGN KEY(country_id) 
-	  REFERENCES country(country_id)
+CREATE TABLE Participa (
+  id_equipe INT,
+  id_campeonato INT,
+  PRIMARY KEY (id_equipe, id_campeonato)
 );
-
--- Creation of store table
-CREATE TABLE IF NOT EXISTS store (
-  store_id INT NOT NULL,
-  name varchar(250) NOT NULL,
-  city_id INT NOT NULL,
-  PRIMARY KEY (store_id),
-  CONSTRAINT fk_city
-      FOREIGN KEY(city_id) 
-	  REFERENCES city(city_id)
-);
-
--- Creation of user table
-CREATE TABLE IF NOT EXISTS users (
-  user_id INT NOT NULL,
-  name varchar(250) NOT NULL,
-  PRIMARY KEY (user_id)
-);
-
--- Creation of status_name table
-CREATE TABLE IF NOT EXISTS status_name (
-  status_name_id INT NOT NULL,
-  status_name varchar(450) NOT NULL,
-  PRIMARY KEY (status_name_id)
-);
-
--- Creation of sale table
-CREATE TABLE IF NOT EXISTS sale (
-  sale_id varchar(200) NOT NULL,
-  amount DECIMAL(20,3) NOT NULL,
-  date_sale TIMESTAMP,
-  product_id INT NOT NULL,
-  user_id INT NOT NULL,
-  store_id INT NOT NULL, 
-  PRIMARY KEY (sale_id),
-  CONSTRAINT fk_product
-      FOREIGN KEY(product_id) 
-	  REFERENCES product(product_id),
-  CONSTRAINT fk_user
-      FOREIGN KEY(user_id) 
-	  REFERENCES users(user_id),
-  CONSTRAINT fk_store
-      FOREIGN KEY(store_id) 
-	  REFERENCES store(store_id)	  
-);
-
--- Creation of order_status table
-CREATE TABLE IF NOT EXISTS order_status (
-  order_status_id varchar(200) NOT NULL,
-  update_at TIMESTAMP,
-  sale_id varchar(200) NOT NULL,
-  status_name_id INT NOT NULL,
-  PRIMARY KEY (order_status_id),
-  CONSTRAINT fk_sale
-      FOREIGN KEY(sale_id) 
-	  REFERENCES sale(sale_id),
-  CONSTRAINT fk_status_name
-      FOREIGN KEY(status_name_id) 
-	  REFERENCES status_name(status_name_id)  
-);
+-- Foreign Key Constraints
+ALTER TABLE Equipe
+ADD FOREIGN KEY(idPatrocionadores) REFERENCES Patrocionadores(id_patrocinador);
+ALTER TABLE Piloto
+ADD FOREIGN KEY(idEquipe) REFERENCES Equipe(id_equipe);
+ALTER TABLE Carro
+ADD FOREIGN KEY(idPiloto) REFERENCES Piloto(Id_Piloto);
+ALTER TABLE Transmite
+ADD FOREIGN KEY(id_campeonato) REFERENCES Campeonato(id_campeonato);
+ALTER TABLE Transmite
+ADD FOREIGN KEY(Emissora) REFERENCES Transmissão(Emissora);
+ALTER TABLE Possui
+ADD FOREIGN KEY(id_campeonato) REFERENCES Campeonato(id_campeonato);
+ALTER TABLE Possui
+ADD FOREIGN KEY(Nome) REFERENCES Circuito(Nome);
+ALTER TABLE Participa
+ADD FOREIGN KEY(id_equipe) REFERENCES Equipe(id_equipe);
+ALTER TABLE Participa
+ADD FOREIGN KEY(id_campeonato) REFERENCES Campeonato(id_campeonato);
