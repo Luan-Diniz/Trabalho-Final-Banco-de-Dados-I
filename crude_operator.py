@@ -65,3 +65,34 @@ class CrudeOperator:
                 DELETE FROM Circuito WHERE Nome = %s AND Local = %s
             """, (nome, local))
             self.con.commit()
+
+    def create_patrocinador(self, marca, valor_do_patrocinio, id_patrocinador):
+        with self.con.cursor() as cur:
+            cur.execute("""
+                INSERT INTO Patrocinadores (Marca, Valor_do_Patrocinio, id_patrocinador)
+                VALUES (%s, %s, %s)
+            """, (marca, valor_do_patrocinio, id_patrocinador))
+            self.con.commit()
+
+    def read_patrocinador(self, id_patrocinador):
+        with self.con.cursor() as cur:
+            cur.execute("""
+                SELECT * FROM Patrocinadores WHERE id_patrocinador = %s
+            """, (id_patrocinador,))
+            return cur.fetchone()
+
+    def update_patrocinador(self, marca, valor_do_patrocinio, id_patrocinador):
+        with self.con.cursor() as cur:
+            cur.execute("""
+                UPDATE Patrocinadores
+                SET Marca = %s, Valor_do_Patrocinio = %s
+                WHERE id_patrocinador = %s
+            """, (marca, valor_do_patrocinio, id_patrocinador))
+            self.con.commit()
+
+    def delete_patrocinador(self, id_patrocinador):
+        with self.con.cursor() as cur:
+            cur.execute("""
+                DELETE FROM Patrocinadores WHERE id_patrocinador = %s
+            """, (id_patrocinador,))
+            self.con.commit()   
