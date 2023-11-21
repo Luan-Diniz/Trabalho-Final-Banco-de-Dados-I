@@ -7,7 +7,7 @@ VALUES ('Oracle', 500000000, 1),
        
        
 -- Inserting data into the Equipe table
-INSERT INTO Equipe (Nome, Sede, id_equipe, Diretor, idPatrocionadores)
+INSERT INTO Equipe (Nome, Sede, id_equipe, Diretor, idPatrocinadores)
 VALUES ('Redbull Racing', 'UK', 1, 'Oliver Mintzlaff', 1),
        ('Mercedes', 'Germany', 2, 'Ola Kallenius', 2),
        ('Ferrari', 'Italy', 3, 'Benedetto Vigna', 3),
