@@ -3,7 +3,7 @@ CREATE TABLE Transmissão (
   Ano INT,
   Comentaristas INT,
   Audiência INT,
-  PRIMARY KEY (Emissora, Ano)
+  PRIMARY KEY (Emissora)
 );
 CREATE TABLE Campeonato (
   id_campeonato INT PRIMARY KEY,
@@ -16,7 +16,7 @@ CREATE TABLE Circuito (
   Extensão FLOAT,
   Nome VARCHAR(255),
   Local VARCHAR(255),
-  PRIMARY KEY (Nome, Local)
+  PRIMARY KEY (Nome)
 );
 CREATE TABLE Equipe (
   Nome VARCHAR(255),
