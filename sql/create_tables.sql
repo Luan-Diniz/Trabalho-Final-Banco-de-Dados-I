@@ -23,7 +23,7 @@ CREATE TABLE Equipe (
   Sede VARCHAR(255),
   id_equipe INT PRIMARY KEY,
   Diretor VARCHAR(255),
-  idPatrocionadores INT
+  idPatrocinadores INT
 );
 CREATE TABLE Piloto (
   Numero_de_pole_positions INT,
@@ -41,7 +41,7 @@ CREATE TABLE Carro (
   Numero_do_carro INT PRIMARY KEY,
   idPiloto INT
 );
-CREATE TABLE Patrocionadores (
+CREATE TABLE Patrocinadores (
   Marca VARCHAR(255),
   Valor_do_Patrocinio FLOAT,
   id_patrocinador INT PRIMARY KEY
@@ -63,7 +63,7 @@ CREATE TABLE Participa (
 );
 -- Foreign Key Constraints
 ALTER TABLE Equipe
-ADD FOREIGN KEY(idPatrocionadores) REFERENCES Patrocionadores(id_patrocinador);
+ADD FOREIGN KEY(idPatrocinadores) REFERENCES Patrocinadores(id_patrocinador);
 ALTER TABLE Piloto
 ADD FOREIGN KEY(idEquipe) REFERENCES Equipe(id_equipe);
 ALTER TABLE Carro
