@@ -35,5 +35,5 @@ Para deletar containers, imagens e volumes docker:
     docker volume ls                   (Lista os volumes docker existentes)
     docker volume rm "nome_volume"     (Remove o volume em específico)
 
-    docker image ls                    (Lista todas as imagens docker existentes)
+    docker images                      (Lista todas as imagens docker existentes)
     docker image rm "nomeImagem_ou_ID" (Remove a imagem em específico)

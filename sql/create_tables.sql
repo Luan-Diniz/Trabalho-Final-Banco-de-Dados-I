@@ -1,14 +1,14 @@
 CREATE TABLE Transmissão (
-  Emissora INT,
+  Emissora VARCHAR(255),
   Ano INT,
-  Comentaristas INT,
+  Comentaristas VARCHAR(255),
   Audiência INT,
   PRIMARY KEY (Emissora)
 );
 CREATE TABLE Campeonato (
   id_campeonato INT PRIMARY KEY,
   Ano INT,
-  Vencedor INT,
+  Vencedor VARCHAR(255),
   Numero_de_Corridas INT
 );
 CREATE TABLE Circuito (
@@ -48,7 +48,7 @@ CREATE TABLE Patrocinadores (
 );
 CREATE TABLE Transmite (
   id_campeonato INT,
-  Emissora INT,
+  Emissora VARCHAR(255),
   PRIMARY KEY (id_campeonato, Emissora)
 );
 CREATE TABLE Possui (

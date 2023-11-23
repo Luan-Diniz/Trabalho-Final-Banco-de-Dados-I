@@ -42,6 +42,10 @@ if teste == "0":
         );
     """)
 '''
+#cursor.execute("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';")
+#print(cursor.fetchall())
 
+cursor.execute("SELECT * FROM equipe;")
+print(cursor.fetchall())
 connection.commit()
 connection.close()

@@ -28,7 +28,7 @@ VALUES (31, 1, 53, 'Max Verstappen', 'Belgian', 549 ,97, 1),
 
 -- Inserting data into the Campeonato table
 INSERT INTO Campeonato (id_campeonato, Ano, Vencedor, Numero_de_Corridas)
-VALUES (1, 2023, 1, 5);
+VALUES (1, 2023, 'Max Verstappen', 5);
 
 
 -- Inserting data into the Circuito table
@@ -42,7 +42,7 @@ VALUES ('01:18.887', 5.8, 'Monza', 'Italy'),
 
 -- Inserting data into the Transmissão table
 INSERT INTO Transmissão (Emissora, Ano, Comentaristas, Audiência)
-VALUES (1, 2023, 5, 1800000);
+VALUES ('Band', 2023, 'Sergio Mauricio, Reginaldo Leme, Felipe Giafone, Mariana Becker', 1800000);
 
 
 -- Inserting data into the Carro table
@@ -59,7 +59,7 @@ VALUES (3, 3, 1, 1),
     
 -- Inserting data into the Transmite table
 INSERT INTO Transmite (id_campeonato, Emissora)
-VALUES (1, 1);
+VALUES (1, 'Band');
 
 
 -- Inserting data into the Possui table
