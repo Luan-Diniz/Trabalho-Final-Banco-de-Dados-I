@@ -8,22 +8,22 @@ VALUES ('Oracle', 500000000, 1),
        
 -- Inserting data into the Equipe table
 INSERT INTO Equipe (Nome, Sede, id_equipe, Diretor, idPatrocinadores)
-VALUES ('Redbull Racing', 'UK', 1, 'Oliver Mintzlaff', 1),
+VALUES ('Redbull', 'UK', 1, 'Oliver Mintzlaff', 1),
        ('Mercedes', 'Germany', 2, 'Ola Kallenius', 2),
        ('Ferrari', 'Italy', 3, 'Benedetto Vigna', 3),
        ('McLaren', 'UK', 4, 'Zak Brown', 4);
        
 
 -- Inserting data into the Piloto table
-INSERT INTO Piloto (Numero_de_pole_positions, Id_Piloto, Número_de_Vitórias, Nome, Nacionalidade, Pontos_de_Corrida, Número_de_Pódios, idEquipe)
-VALUES (31, 1, 53, 'Max Verstappen', 'Belgian', 549 ,97, 1),
-       (3, 2, 6, 'Sergio Perez', 'Mexican', 273, 35, 1),		
-       (104 , 3, 103, 'Lewis Hamilton', 'British', 232, 197, 2),
-       (1, 4, 1, 'George Russel', 'British', 160, 10, 2),
-       (23, 5, 5, 'Charles Leclerc', 'Monegasque', 188, 29, 3),
-       (5, 6, 2, 'Carlos Sainz Jr.', 'Spanish', 200, 18, 3),
-       (1, 7, 0,'Lando Norris', 'British', 195, 13, 4),
-       (0, 8, 0, 'Oscar Piastri', 'Australian', 89, 2, 4);
+INSERT INTO Piloto (Numero_de_pole_positions, Id_Piloto, Número_de_Vitórias, Nome, Nacionalidade, Pontos_de_Corrida, Número_de_Pódios, idEquipe, Ano_Campeonato)
+VALUES (31, 1, 53, 'Max Verstappen', 'Belgian', 549 ,97, 1, 2023),
+       (3, 2, 6, 'Sergio Perez', 'Mexican', 273, 35, 1, 2023),		
+       (104 , 3, 103, 'Lewis Hamilton', 'British', 232, 197, 2, 2023),
+       (1, 4, 1, 'George Russel', 'British', 160, 10, 2, 2023),
+       (23, 5, 5, 'Charles Leclerc', 'Monegasque', 188, 29, 3, 2023),
+       (5, 6, 2, 'Carlos Sainz Jr.', 'Spanish', 200, 18, 3, 2023),
+       (1, 7, 0,'Lando Norris', 'British', 195, 13, 4, 2023),
+       (0, 8, 0, 'Oscar Piastri', 'Australian', 89, 2, 4, 2023);
 
 
 -- Inserting data into the Campeonato table

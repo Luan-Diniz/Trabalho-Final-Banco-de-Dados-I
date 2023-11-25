@@ -33,7 +33,8 @@ CREATE TABLE Piloto (
   Nacionalidade VARCHAR(255),
   Pontos_de_Corrida INT,
   Número_de_Pódios INT,
-  idEquipe INT
+  idEquipe INT,
+  Ano_Campeonato INT
 );
 CREATE TABLE Carro (
   Trocas_MGU_K INT,

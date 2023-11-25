@@ -1,15 +1,16 @@
 import psycopg2
+import pandas as pd
+from specific_queries import SpecificQueries
 
 connection = psycopg2.connect(host="localhost", dbname="formula1",
-        user="postgres", password="postgres", port=2023)
-    
-cursor = connection.cursor()
+		user="postgres", password="postgres", port=2023)
 
+cursor = connection.cursor()
+our_queries = SpecificQueries(cursor)
 
 
 isRunning = True
 
-'''
 while isRunning:
 	#CODE HERE
 	print("----------BANCO DE DADOS DA FORMULA1 ---------------")
@@ -22,30 +23,31 @@ while isRunning:
 	user_input = input()
 	if user_input == '0':
 		isRunning = False
+		print("Fechando o programa...")
 		continue
+
 	elif user_input == '1':
-		pass
+		print("Qual das seguintes consultas você quer fazer?")
+		print("\t CLASSIFICAÇÃO PILOTOS: Digite 1")
+		print("\t PATROCINADORES DAS EQUIPES: Digite 2")
+		user_input = input()
+
+		if user_input == '1':
+			ano_consulta = input("De qual ano?")
+			print()
+			our_queries.show_pontuation(ano_consulta)
+
+		elif user_input == '2':
+			our_queries.not_in_team()
+                
+
 	elif user_input == '2':
 		pass
 	else:
 		print("OPERAÇÃO INVÁLIDA!")
-'''
 
 
-'''
-teste = input("Type 0 to create a table Ararangua")
 
-if teste == "0":
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS Ararangua(
-            name VARCHAR(255)
-        );
-    """)
-'''
-#cursor.execute("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';")
-#print(cursor.fetchall())
 
-cursor.execute("SELECT * FROM equipe;")
-print(cursor.fetchall())
 connection.commit()
 connection.close()
