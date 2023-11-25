@@ -12,7 +12,6 @@ our_queries = SpecificQueries(cursor)
 isRunning = True
 
 while isRunning:
-	#CODE HERE
 	print("----------BANCO DE DADOS DA FORMULA1 ---------------")
 	print("Selecione o que você quer fazer: ")
 	print("\tCONSULTA: Digite 1")
@@ -30,6 +29,7 @@ while isRunning:
 		print("Qual das seguintes consultas você quer fazer?")
 		print("\t CLASSIFICAÇÃO PILOTOS: Digite 1")
 		print("\t PATROCINADORES DAS EQUIPES: Digite 2")
+		print("\t CIRCUITOS NÃO USADOS: Digite 3")
 		user_input = input()
 
 		if user_input == '1':
@@ -39,13 +39,20 @@ while isRunning:
 
 		elif user_input == '2':
 			our_queries.not_in_team()
+
+		elif user_input == '3':
+			our_queries.not_used_tracks()
+		
+		else:
+			print("Inválido")
+			print()
                 
 
 	elif user_input == '2':
-		pass
+		print("Em qual tabela?")
+		#TODO
 	else:
 		print("OPERAÇÃO INVÁLIDA!")
-
 
 
 

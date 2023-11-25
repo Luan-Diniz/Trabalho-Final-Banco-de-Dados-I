@@ -37,7 +37,9 @@ VALUES ('01:18.887', 5.8, 'Monza', 'Italy'),
        ('01:27.369', 5.9, 'Silverstone', 'UK'),
        ('01:47.176', 7, 'Spa-Francorchamps', 'Belgium'),
        ('01:10.540', 4.3, 'Interlagos', 'Brazil'),
-       ('01:14.439', 3.3, 'Circuit de Monaco', 'Monaco');
+       ('01:14.439', 3.3, 'Circuit de Monaco', 'Monaco'),
+       ('01:28.139', 5.1, 'Nurburbring Strecke', 'Germany'),
+       ('01:32.740', 5.8, 'Circuit Paul Ricard', 'France');
        
 
 -- Inserting data into the Transmissão table
