@@ -24,10 +24,12 @@ class UserOption(Enum):
 
 class DBManager:
     @staticmethod
-    def execute_user_action(user_option, table_option, db_cursor):
+    def execute_user_action(user_option, table_option, db_cursor, input_data):
         operator = CrudeOperator(db_cursor)
         action = DBManager.get_action(user_option)
-        return action(table_option, operator) if action else "Opção inválida"
+        return (
+            action(table_option, operator, input_data) if action else "Opção inválida"
+        )
 
     @staticmethod
     def get_action(user_option):
@@ -39,11 +41,30 @@ class DBManager:
         }.get(user_option)
 
     @staticmethod
-    def perform_insert(table_option, operator):
+    def perform_insert(table_option, operator, input_data):
         table_name = DBManager.get_table_name(table_option)
         if table_name:
-            # Insert logic here
-            return f"Insert into {table_name}"
+            match table_name:
+                case "Transmissão":
+                    return operator.create_transmissao()
+                case "Circuito":
+                    return operator.create_circuito()
+                case "Patrocinadores":
+                    return operator.create_patrocinadores()
+                case "Campeonato":
+                    return operator.create_campeonato()
+                case "Equipe":
+                    return operator.create_equipe()
+                case "Piloto":
+                    return operator.create_piloto()
+                case "Carro":
+                    return operator.create_carro()
+                case "Transmite":
+                    return operator.create_transmite()
+                case "Participa":
+                    return operator.create_participa()
+                case "Possui":
+                    return operator.create_possui()
         return "Opção inválida"
 
     @staticmethod
@@ -75,10 +96,3 @@ class DBManager:
             TableOption.PARTICIPA: "Participa",
             TableOption.POSSUI: "Possui",
         }.get(table_option)
-
-
-# Example Usage
-db_cursor = ...
-user_option = UserOption.INSERT
-table_option = TableOption.CIRCUITO
-result = DBManager.execute_user_action(user_option, table_option, db_cursor)

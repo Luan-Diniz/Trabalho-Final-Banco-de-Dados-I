@@ -1,6 +1,7 @@
 import psycopg2
 import pandas as pd
 from specific_queries import SpecificQueries
+from db_manager import DBManager
 
 
 def connect_to_db():
@@ -85,6 +86,8 @@ def main():
                     "10": "Possui",
                 },
             )
+            input_user = input("Digite os dados separados por vírgula: ").split(",")
+            DBManager.execute_user_action(user_choice, table_choice, cursor, input_user)
     connection.commit()
     connection.close()
 
