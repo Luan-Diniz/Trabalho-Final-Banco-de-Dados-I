@@ -65,6 +65,8 @@ CREATE TABLE Participa (
 -- Foreign Key Constraints
 ALTER TABLE Equipe
 ADD FOREIGN KEY(idPatrocinadores) REFERENCES Patrocinadores(id_patrocinador);
+ALTER TABLE Equipe
+ADD UNIQUE (idPatrocinadores);
 ALTER TABLE Piloto
 ADD FOREIGN KEY(idEquipe) REFERENCES Equipe(id_equipe);
 ALTER TABLE Carro
