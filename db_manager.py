@@ -29,6 +29,18 @@ class Constant:
 class DBManager:
     @staticmethod
     def execute_user_action(user_option, table_option, db_cursor, input_data):
+        """
+        Executa uma ação de usuário no banco de dados.
+
+        Args:
+            user_option (UserOption): A opção escolhida pelo usuário (INSERT, UPDATE, DELETE ou SELECT).
+            table_option (TableOption): A tabela na qual a ação será realizada.
+            db_cursor: O cursor do banco de dados.
+            input_data: Dados de entrada para a ação.
+
+        Returns:
+            str: O resultado da ação do usuário.
+        """
         operator = CrudeOperator(db_cursor)
         action = DBManager.get_action(user_option)
         return (
@@ -39,6 +51,15 @@ class DBManager:
 
     @staticmethod
     def get_action(user_option):
+        """
+        Obtém a função de ação correspondente com base na opção do usuário.
+
+        Args:
+            user_option (UserOption): A opção escolhida pelo usuário (INSERT, UPDATE, DELETE ou SELECT).
+
+        Returns:
+            function: A função de ação correspondente.
+        """
         return {
             UserOption.INSERT: DBManager.perform_insert,
             UserOption.UPDATE: DBManager.perform_update,
@@ -48,6 +69,17 @@ class DBManager:
 
     @staticmethod
     def perform_insert(table_option, operator, input_data):
+        """
+        Executa uma inserção de dados na tabela especificada.
+
+        Args:
+            table_option (TableOption): A tabela na qual os dados serão inseridos.
+            operator: O operador CRUD para interagir com o banco de dados.
+            input_data: Dados a serem inseridos.
+
+        Returns:
+            str: O resultado da inserção.
+        """
         table_name = DBManager.get_table_name(table_option)
         if table_name:
             match table_name:
@@ -75,6 +107,17 @@ class DBManager:
 
     @staticmethod
     def perform_update(table_option, operator, input_data):
+        """
+        Executa uma atualização de dados na tabela especificada.
+
+        Args:
+            table_option (TableOption): A tabela na qual os dados serão atualizados.
+            operator: O operador CRUD para interagir com o banco de dados.
+            input_data: Dados para atualização.
+
+        Returns:
+            str: O resultado da atualização.
+        """
         table_name = DBManager.get_table_name(table_option)
         if table_name:
             match table_name:
@@ -102,6 +145,17 @@ class DBManager:
 
     @staticmethod
     def perform_delete(table_option, operator, input_data):
+        """
+        Executa uma exclusão de dados na tabela especificada.
+
+        Args:
+            table_option (TableOption): A tabela da qual os dados serão excluídos.
+            operator: O operador CRUD para interagir com o banco de dados.
+            input_data: Dados para exclusão.
+
+        Returns:
+            str: O resultado da exclusão.
+        """
         table_name = DBManager.get_table_name(table_option)
         if table_name:
             match table_name:
@@ -129,6 +183,17 @@ class DBManager:
 
     @staticmethod
     def perform_select(table_option, operator, input_data):
+        """
+        Executa uma consulta na tabela especificada.
+
+        Args:
+            table_option (TableOption): A tabela na qual a consulta será realizada.
+            operator: O operador CRUD para interagir com o banco de dados.
+            input_data: Dados para a consulta.
+
+        Returns:
+            str: O resultado da consulta.
+        """
         table_name = DBManager.get_table_name(table_option)
         if table_name:
             match table_name:
@@ -156,6 +221,15 @@ class DBManager:
 
     @staticmethod
     def get_table_name(table_option):
+        """
+        Obtém o nome da tabela com base na opção de tabela.
+
+        Args:
+            table_option (TableOption): A opção de tabela.
+
+        Returns:
+            str: O nome da tabela.
+        """
         return {
             TableOption.TRANSMISSAO: "Transmissão",
             TableOption.CIRCUITO: "Circuito",
