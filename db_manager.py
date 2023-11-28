@@ -20,8 +20,8 @@ class DBManager:
     }
 
     @staticmethod
-    def execute_user_action(user_option, table_option, db_cursor):
-        operator = CrudeOperator(db_cursor)
+    def execute_user_action(user_option, table_option, db_cursor, connection):
+        operator = CrudeOperator(db_cursor, connection)
         action = DBManager.get_action(user_option)
         table = DBManager.get_table_name(table_option)
         return action(table_option, operator)

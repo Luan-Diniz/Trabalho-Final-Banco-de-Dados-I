@@ -1,6 +1,7 @@
 class CrudeOperator:
-    def __init__(self, db_cursor):
+    def __init__(self, db_cursor, connection):
         self.con = db_cursor
+        self.connection = connection
 
     def create_transmissao(self):
         emissora = input("Emissora: ")
@@ -15,7 +16,7 @@ class CrudeOperator:
             """,
                 (emissora, ano, comentaristas, audiencia),
             )
-            self.con.commit()
+            self.connection.commit()
 
     def read_transmissao(self):
         emissora = input("Emissora: ")
@@ -43,7 +44,7 @@ class CrudeOperator:
             """,
                 (comentaristas, audiencia, emissora, ano),
             )
-            self.con.commit()
+            self.connection
 
     def delete_transmissao(self):
         emissora = input("Emissora: ")
@@ -55,7 +56,7 @@ class CrudeOperator:
             """,
                 (emissora, ano),
             )
-            self.con.commit()
+            self.connection
 
     def create_circuito(self):
         nome = input("Nome do Circuito: ")
@@ -70,7 +71,7 @@ class CrudeOperator:
             """,
                 (nome, local, melhor_tempo, extensao),
             )
-            self.con.commit()
+            self.connection
 
     def read_circuito(self):
         nome = input("Nome do Circuito: ")
@@ -98,7 +99,7 @@ class CrudeOperator:
             """,
                 (melhor_tempo, extensao, nome, local),
             )
-            self.con.commit()
+            self.connection
 
     def delete_circuito(self):
         nome = input("Nome do Circuito: ")
@@ -110,7 +111,7 @@ class CrudeOperator:
             """,
                 (nome, local),
             )
-            self.con.commit()
+            self.connection
 
     def create_patrocinador(self):
         marca = input("Marca: ")
@@ -124,7 +125,7 @@ class CrudeOperator:
             """,
                 (marca, valor_do_patrocinio, id_patrocinador),
             )
-            self.con.commit()
+            self.connection
 
     def read_patrocinador(self):
         id_patrocinador = input("ID do Patrocinador: ")
@@ -150,7 +151,7 @@ class CrudeOperator:
             """,
                 (marca, valor_do_patrocinio, id_patrocinador),
             )
-            self.con.commit()
+            self.connection
 
     def delete_patrocinador(self):
         id_patrocinador = input("ID do Patrocinador: ")
@@ -161,7 +162,7 @@ class CrudeOperator:
             """,
                 (id_patrocinador,),
             )
-            self.con.commit()
+            self.connection
 
     def create_campeonato(self):
         id_campeonato = input("ID do Campeonato: ")
@@ -176,7 +177,7 @@ class CrudeOperator:
                 """,
                 (id_campeonato, ano, vencedor, numero_de_corridas),
             )
-            self.con.commit()
+            self.connection
 
     def read_campeonato(self):
         id_campeonato = input("ID do Campeonato: ")
@@ -203,7 +204,7 @@ class CrudeOperator:
                 """,
                 (ano, vencedor, numero_de_corridas, id_campeonato),
             )
-            self.con.commit()
+            self.connection
 
     def delete_campeonato(self):
         id_campeonato = input("ID do Campeonato: ")
@@ -214,7 +215,7 @@ class CrudeOperator:
                 """,
                 (id_campeonato,),
             )
-            self.con.commit()
+            self.connection
 
     def create_carro(self):
         trocas_mgu_k = int(input("Número de Trocas MGU-K: "))
@@ -229,7 +230,7 @@ class CrudeOperator:
                 """,
                 (trocas_mgu_k, trocas_mgu_h, numero_do_carro, id_piloto),
             )
-            self.con.commit()
+            self.connection
 
     def read_carro(self):
         numero_do_carro = input("Número do Carro: ")
@@ -256,7 +257,7 @@ class CrudeOperator:
                 """,
                 (trocas_mgu_k, trocas_mgu_h, id_piloto, numero_do_carro),
             )
-            self.con.commit()
+            self.connection
 
     def delete_carro(self):
         numero_do_carro = input("Número do Carro: ")
@@ -267,7 +268,7 @@ class CrudeOperator:
                 """,
                 (numero_do_carro,),
             )
-            self.con.commit()
+            self.connection
 
     def create_piloto(self):
         numero_de_pole_positions = int(input("Número de Pole Positions: "))
@@ -297,7 +298,7 @@ class CrudeOperator:
                     ano_campeonato,
                 ),
             )
-            self.con.commit()
+            self.connection
 
     def read_piloto(self):
         id_piloto = input("ID do Piloto: ")
@@ -339,7 +340,7 @@ class CrudeOperator:
                     id_piloto,
                 ),
             )
-            self.con.commit()
+            self.connection
 
     def delete_piloto(self):
         id_piloto = input("ID do Piloto: ")
@@ -350,7 +351,7 @@ class CrudeOperator:
                 """,
                 (id_piloto,),
             )
-            self.con.commit()
+            self.connection
 
     def create_equipe(self):
         nome = input("Nome da Equipe: ")
@@ -366,7 +367,7 @@ class CrudeOperator:
                 """,
                 (nome, sede, id_equipe, diretor, idPatrocinadores),
             )
-            self.con.commit()
+            self.connection
 
     def read_equipe(self):
         id_equipe = input("ID da Equipe: ")
@@ -394,7 +395,7 @@ class CrudeOperator:
                 """,
                 (nome, sede, diretor, idPatrocinadores, id_equipe),
             )
-            self.con.commit()
+            self.connection
 
     def delete_equipe(self):
         id_equipe = input("ID da Equipe: ")
@@ -405,7 +406,7 @@ class CrudeOperator:
                 """,
                 (id_equipe,),
             )
-            self.con.commit()
+            self.connection
 
     def create_participa(self):
         id_equipe = input("ID da Equipe: ")
@@ -418,7 +419,7 @@ class CrudeOperator:
                 """,
                 (id_equipe, id_campeonato),
             )
-            self.con.commit()
+            self.connection
 
     def read_participa(self):
         id_equipe = input("ID da Equipe: ")
@@ -446,7 +447,7 @@ class CrudeOperator:
                 """,
                 (new_id_equipe, new_id_campeonato, id_equipe, id_campeonato),
             )
-            self.con.commit()
+            self.connection
 
     def delete_participa(self):
         id_equipe = input("ID da Equipe: ")
@@ -458,7 +459,7 @@ class CrudeOperator:
                 """,
                 (id_equipe, id_campeonato),
             )
-            self.con.commit()
+            self.connection
 
     def create_possui(self):
         id_campeonato = input("ID do Campeonato: ")
@@ -471,7 +472,7 @@ class CrudeOperator:
                 """,
                 (id_campeonato, nome),
             )
-            self.con.commit()
+            self.connection
 
     def read_possui(self):
         id_campeonato = input("ID do Campeonato: ")
@@ -499,7 +500,7 @@ class CrudeOperator:
                 """,
                 (new_id_campeonato, new_nome, id_campeonato, nome),
             )
-            self.con.commit()
+            self.connection
 
     def delete_possui(self):
         id_campeonato = input("ID do Campeonato: ")
@@ -511,7 +512,7 @@ class CrudeOperator:
                 """,
                 (id_campeonato, nome),
             )
-            self.con.commit()
+            self.connection
 
     def create_transmite(self):
         id_campeonato = input("ID do Campeonato: ")
@@ -524,7 +525,7 @@ class CrudeOperator:
                 """,
                 (id_campeonato, emissora),
             )
-            self.con.commit()
+            self.connection
 
     def read_transmite(self):
         id_campeonato = input("ID do Campeonato: ")
@@ -552,7 +553,7 @@ class CrudeOperator:
                 """,
                 (new_id_campeonato, new_emissora, id_campeonato, emissora),
             )
-            self.con.commit()
+            self.connection
 
     def delete_transmite(self):
         id_campeonato = input("ID do Campeonato: ")
@@ -564,4 +565,4 @@ class CrudeOperator:
                 """,
                 (id_campeonato, emissora),
             )
-            self.con.commit()
+            self.connection
