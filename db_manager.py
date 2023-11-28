@@ -43,6 +43,10 @@ class DBManager:
         """
         operator = CrudeOperator(db_cursor)
         action = DBManager.get_action(user_option)
+        table = DBManager.get_table_name(table_option)
+        print(operator)
+        print(action)
+        print(table)
         return (
             action(table_option, operator, input_data)
             if action
@@ -61,10 +65,10 @@ class DBManager:
             function: A função de ação correspondente.
         """
         return {
-            UserOption.INSERT: DBManager.perform_insert,
-            UserOption.UPDATE: DBManager.perform_update,
-            UserOption.DELETE: DBManager.perform_delete,
-            UserOption.SELECT: DBManager.perform_select,
+            "1": DBManager.perform_insert,
+            "2": DBManager.perform_update,
+            "3": DBManager.perform_delete,
+            "4": DBManager.perform_select,
         }.get(user_option)
 
     @staticmethod
@@ -231,14 +235,14 @@ class DBManager:
             str: O nome da tabela.
         """
         return {
-            TableOption.TRANSMISSAO: "Transmissão",
-            TableOption.CIRCUITO: "Circuito",
-            TableOption.PATROCINADORES: "Patrocinadores",
-            TableOption.CAMPEONATO: "Campeonato",
-            TableOption.EQUIPE: "Equipe",
-            TableOption.PILOTO: "Piloto",
-            TableOption.CARRO: "Carro",
-            TableOption.TRANSMITE: "Transmite",
-            TableOption.PARTICIPA: "Participa",
-            TableOption.POSSUI: "Possui",
+            "1": "Transmissão",
+            "2": "Circuito",
+            "3": "Patrocinadores",
+            "4": "Campeonato",
+            "5": "Equipe",
+            "6": "Piloto",
+            "7": "Carro",
+            "8": "Transmite",
+            "9": "Participa",
+            "10": "Possui",
         }.get(table_option)
