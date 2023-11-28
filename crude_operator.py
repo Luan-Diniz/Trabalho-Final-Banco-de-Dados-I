@@ -113,7 +113,7 @@ class CrudeOperator:
             )
             self.connection
 
-    def create_patrocinador(self):
+    def create_patrocinadores(self):
         marca = input("Marca: ")
         valor_do_patrocinio = input("Valor do Patrocínio: ")
         id_patrocinador = input("ID do Patrocinador: ")
@@ -127,7 +127,7 @@ class CrudeOperator:
             )
             self.connection
 
-    def read_patrocinador(self):
+    def read_patrocinadores(self):
         id_patrocinador = input("ID do Patrocinador: ")
         with self.con as cur:
             cur.execute(
@@ -138,7 +138,7 @@ class CrudeOperator:
             )
             return cur.fetchone()
 
-    def update_patrocinador(self):
+    def update_patrocinadores(self):
         marca = input("Marca: ")
         valor_do_patrocinio = input("Valor do Patrocínio: ")
         id_patrocinador = input("ID do Patrocinador: ")
@@ -153,7 +153,7 @@ class CrudeOperator:
             )
             self.connection
 
-    def delete_patrocinador(self):
+    def delete_patrocinadores(self):
         id_patrocinador = input("ID do Patrocinador: ")
         with self.con as cur:
             cur.execute(
