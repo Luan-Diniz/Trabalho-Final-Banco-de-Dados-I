@@ -87,7 +87,11 @@ def main():
                 },
             )
             input_user = input("Digite os dados separados por vírgula: ").split(",")
-            DBManager.execute_user_action(user_choice, table_choice, cursor, input_user)
+            print(
+                DBManager.execute_user_action(
+                    user_choice, table_choice, cursor, input_user
+                )
+            )
     connection.commit()
     connection.close()
 

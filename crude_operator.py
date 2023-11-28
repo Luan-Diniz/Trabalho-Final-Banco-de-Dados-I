@@ -1,6 +1,3 @@
-import psycopg2
-
-
 class CrudeOperator:
     def __init__(self, db_cursor):
         self.con = db_cursor
