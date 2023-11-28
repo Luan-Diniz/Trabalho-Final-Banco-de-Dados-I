@@ -1,25 +1,4 @@
-from enum import Enum
 from crude_operator import CrudeOperator
-
-
-class TableOption(Enum):
-    TRANSMISSAO = 1
-    CIRCUITO = 2
-    PATROCINADORES = 3
-    CAMPEONATO = 4
-    EQUIPE = 5
-    PILOTO = 6
-    CARRO = 7
-    TRANSMITE = 8
-    PARTICIPA = 9
-    POSSUI = 10
-
-
-class UserOption(Enum):
-    INSERT = 1
-    UPDATE = 2
-    DELETE = 3
-    SELECT = 4
 
 
 class Constant:
@@ -27,43 +6,28 @@ class Constant:
 
 
 class DBManager:
+    table_names = {
+        "1": "Transmissão",
+        "2": "Circuito",
+        "3": "Patrocinadores",
+        "4": "Campeonato",
+        "5": "Equipe",
+        "6": "Piloto",
+        "7": "Carro",
+        "8": "Transmite",
+        "9": "Participa",
+        "10": "Possui",
+    }
+
     @staticmethod
-    def execute_user_action(user_option, table_option, db_cursor, input_data):
-        """
-        Executa uma ação de usuário no banco de dados.
-
-        Args:
-            user_option (UserOption): A opção escolhida pelo usuário (INSERT, UPDATE, DELETE ou SELECT).
-            table_option (TableOption): A tabela na qual a ação será realizada.
-            db_cursor: O cursor do banco de dados.
-            input_data: Dados de entrada para a ação.
-
-        Returns:
-            str: O resultado da ação do usuário.
-        """
+    def execute_user_action(user_option, table_option, db_cursor):
         operator = CrudeOperator(db_cursor)
         action = DBManager.get_action(user_option)
         table = DBManager.get_table_name(table_option)
-        print(operator)
-        print(action)
-        print(table)
-        return (
-            action(table_option, operator, input_data)
-            if action
-            else Constant.default_answer
-        )
+        return action(table_option, operator)
 
     @staticmethod
     def get_action(user_option):
-        """
-        Obtém a função de ação correspondente com base na opção do usuário.
-
-        Args:
-            user_option (UserOption): A opção escolhida pelo usuário (INSERT, UPDATE, DELETE ou SELECT).
-
-        Returns:
-            function: A função de ação correspondente.
-        """
         return {
             "1": DBManager.perform_insert,
             "2": DBManager.perform_update,
@@ -72,177 +36,113 @@ class DBManager:
         }.get(user_option)
 
     @staticmethod
-    def perform_insert(table_option, operator, input_data):
-        """
-        Executa uma inserção de dados na tabela especificada.
-
-        Args:
-            table_option (TableOption): A tabela na qual os dados serão inseridos.
-            operator: O operador CRUD para interagir com o banco de dados.
-            input_data: Dados a serem inseridos.
-
-        Returns:
-            str: O resultado da inserção.
-        """
+    def perform_insert(table_option, operator):
         table_name = DBManager.get_table_name(table_option)
         if table_name:
             match table_name:
                 case "Transmissão":
-                    return operator.create_transmissao(input_data)
+                    return operator.create_transmissao()
                 case "Circuito":
-                    return operator.create_circuito(input_data)
+                    return operator.create_circuito()
                 case "Patrocinadores":
-                    return operator.create_patrocinadores(input_data)
+                    return operator.create_patrocinadores()
                 case "Campeonato":
-                    return operator.create_campeonato(input_data)
+                    return operator.create_campeonato()
                 case "Equipe":
-                    return operator.create_equipe(input_data)
+                    return operator.create_equipe()
                 case "Piloto":
-                    return operator.create_piloto(input_data)
+                    return operator.create_piloto()
                 case "Carro":
-                    return operator.create_carro(input_data)
+                    return operator.create_carro()
                 case "Transmite":
-                    return operator.create_transmite(input_data)
+                    return operator.create_transmite()
                 case "Participa":
-                    return operator.create_participa(input_data)
+                    return operator.create_participa()
                 case "Possui":
-                    return operator.create_possui(input_data)
+                    return operator.create_possui()
         return Constant.default_answer
 
     @staticmethod
-    def perform_update(table_option, operator, input_data):
-        """
-        Executa uma atualização de dados na tabela especificada.
-
-        Args:
-            table_option (TableOption): A tabela na qual os dados serão atualizados.
-            operator: O operador CRUD para interagir com o banco de dados.
-            input_data: Dados para atualização.
-
-        Returns:
-            str: O resultado da atualização.
-        """
+    def perform_update(table_option, operator):
         table_name = DBManager.get_table_name(table_option)
         if table_name:
             match table_name:
                 case "Transmissão":
-                    return operator.update_transmissao(input_data)
+                    return operator.update_transmissao()
                 case "Circuito":
-                    return operator.update_circuito(input_data)
+                    return operator.update_circuito()
                 case "Patrocinadores":
-                    return operator.update_patrocinadores(input_data)
+                    return operator.update_patrocinadores()
                 case "Campeonato":
-                    return operator.update_campeonato(input_data)
+                    return operator.update_campeonato()
                 case "Equipe":
-                    return operator.update_equipe(input_data)
+                    return operator.update_equipe()
                 case "Piloto":
-                    return operator.update_piloto(input_data)
+                    return operator.update_piloto()
                 case "Carro":
-                    return operator.update_carro(input_data)
+                    return operator.update_carro()
                 case "Transmite":
-                    return operator.update_transmite(input_data)
+                    return operator.update_transmite()
                 case "Participa":
-                    return operator.update_participa(input_data)
+                    return operator.update_participa()
                 case "Possui":
-                    return operator.update_possui(input_data)
+                    return operator.update_possui()
         return Constant.default_answer
 
     @staticmethod
-    def perform_delete(table_option, operator, input_data):
-        """
-        Executa uma exclusão de dados na tabela especificada.
-
-        Args:
-            table_option (TableOption): A tabela da qual os dados serão excluídos.
-            operator: O operador CRUD para interagir com o banco de dados.
-            input_data: Dados para exclusão.
-
-        Returns:
-            str: O resultado da exclusão.
-        """
+    def perform_delete(table_option, operator):
         table_name = DBManager.get_table_name(table_option)
         if table_name:
             match table_name:
                 case "Transmissão":
-                    return operator.delete_transmissao(input_data)
+                    return operator.delete_transmissao()
                 case "Circuito":
-                    return operator.delete_circuito(input_data)
+                    return operator.delete_circuito()
                 case "Patrocinadores":
-                    return operator.delete_patrocinadores(input_data)
+                    return operator.delete_patrocinadores()
                 case "Campeonato":
-                    return operator.delete_campeonato(input_data)
+                    return operator.delete_campeonato()
                 case "Equipe":
-                    return operator.delete_equipe(input_data)
+                    return operator.delete_equipe()
                 case "Piloto":
-                    return operator.delete_piloto(input_data)
+                    return operator.delete_piloto()
                 case "Carro":
-                    return operator.delete_carro(input_data)
+                    return operator.delete_carro()
                 case "Transmite":
-                    return operator.delete_transmite(input_data)
+                    return operator.delete_transmite()
                 case "Participa":
-                    return operator.delete_participa(input_data)
+                    return operator.delete_participa()
                 case "Possui":
-                    return operator.delete_possui(input_data)
+                    return operator.delete_possui()
         return Constant.default_answer
 
     @staticmethod
-    def perform_select(table_option, operator, input_data):
-        """
-        Executa uma consulta na tabela especificada.
-
-        Args:
-            table_option (TableOption): A tabela na qual a consulta será realizada.
-            operator: O operador CRUD para interagir com o banco de dados.
-            input_data: Dados para a consulta.
-
-        Returns:
-            str: O resultado da consulta.
-        """
+    def perform_select(table_option, operator):
         table_name = DBManager.get_table_name(table_option)
         if table_name:
             match table_name:
                 case "Transmissão":
-                    return operator.read_transmissao(input_data)
+                    return operator.read_transmissao()
                 case "Circuito":
-                    return operator.read_circuito(input_data)
+                    return operator.read_circuito()
                 case "Patrocinadores":
-                    return operator.read_patrocinadores(input_data)
+                    return operator.read_patrocinadores()
                 case "Campeonato":
-                    return operator.read_campeonato(input_data)
+                    return operator.read_campeonato()
                 case "Equipe":
-                    return operator.read_equipe(input_data)
+                    return operator.read_equipe()
                 case "Piloto":
-                    return operator.read_piloto(input_data)
+                    return operator.read_piloto()
                 case "Carro":
-                    return operator.read_carro(input_data)
+                    return operator.read_carro()
                 case "Transmite":
-                    return operator.read_transmite(input_data)
+                    return operator.read_transmite()
                 case "Participa":
-                    return operator.read_participa(input_data)
+                    return operator.read_participa()
                 case "Possui":
-                    return operator.read_possui(input_data)
+                    return operator.read_possui()
         return Constant.default_answer
 
     @staticmethod
     def get_table_name(table_option):
-        """
-        Obtém o nome da tabela com base na opção de tabela.
-
-        Args:
-            table_option (TableOption): A opção de tabela.
-
-        Returns:
-            str: O nome da tabela.
-        """
-        return {
-            "1": "Transmissão",
-            "2": "Circuito",
-            "3": "Patrocinadores",
-            "4": "Campeonato",
-            "5": "Equipe",
-            "6": "Piloto",
-            "7": "Carro",
-            "8": "Transmite",
-            "9": "Participa",
-            "10": "Possui",
-        }.get(table_option)
+        return DBManager.table_names.get(table_option)
